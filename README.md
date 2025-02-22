@@ -4,9 +4,10 @@ Deliveralbe 1
  done a platformer last year
 
 Requirements
--A game about solving puzzles in a maze needs to be created
--Target audience are teenagers and higher, game is simple but will get progressively harder
--The objective is to create a puzzle game with a maze that has levels that get progressively harder and harder
--OOP needs to be correctly used
+-A game about solving puzzles in a maze needs to be created. 
+-Target audience are teenagers and higher, game is not for small chidren due to their limited cognitive ability
+-The objective is to create a puzzle game with a maze that contains puzzles or makes the player navigate a maze. It needs to have multiple levels that get progessively harder
+ each level
+-OOP needs to be correctly used. With proper classes and subclasses. Inheritance, polmorphysm have to be correctly used and implemented. Code must also be extremely modular,  with it able to be used in other projects with minimal adjustments
 
 
