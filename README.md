@@ -10,4 +10,6 @@ Requirements
  each level
 -OOP needs to be correctly used. With proper classes and subclasses. Inheritance, polmorphysm have to be correctly used and implemented. Code must also be extremely modular,  with it able to be used in other projects with minimal adjustments
 
-
+Plan/Design
+-Player will navigate a maze/maze like building solving puzzles on the way, these puzzles get progressively harder and harder. Some will be easy, some may involve
+ running from enemies.
