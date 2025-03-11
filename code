@@ -1,5 +1,4 @@
 
-
 import random, sys, copy, os, pygame
 from pygame.locals import *
 
@@ -8,11 +7,42 @@ WINWIDTH = 800
 WINHEIGHT = 600 
 
 def main():
-   
     pygame.init()
-    FPS = pygame.time.Clock()
+    clock = pygame.time.Clock()
+    screen = pygame.display.set_mode((WINWIDTH, WINHEIGHT))
+    pygame.display.set_caption("My Game")
 
-    
+    start_menu()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                terminate()
+
+
+        screen.fill((0, 0, 255))  
+        pygame.display.flip()
+        clock.tick(FPS)
+
+
+def start_menu():
+    screen = pygame.display.set_mode((WINWIDTH, WINHEIGHT))
+    font = pygame.font.Font(None, 74)  
+    text = font.render("Press ENTER to Start", True, (255, 255, 255)) 
+    text_rect = text.get_rect(center=(WINWIDTH // 2, WINHEIGHT // 2))
+
+    while True:
+        screen.fill((0, 0, 0)) 
+        screen.blit(text, text_rect)  
+        pygame.display.flip()
+
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                terminate()
+            elif event.type == KEYDOWN:
+                if event.key == K_RETURN: 
+                    return  
+
 def terminate():
     pygame.quit()
     sys.exit()
