@@ -1,0 +1,22 @@
+
+
+import random, sys, copy, os, pygame
+from pygame.locals import *
+
+FPS = 30 
+WINWIDTH = 800 
+WINHEIGHT = 600 
+
+def main():
+   
+    pygame.init()
+    FPS = pygame.time.Clock()
+
+    
+def terminate():
+    pygame.quit()
+    sys.exit()
+
+
+if __name__ == '__main__':
+    main()
