@@ -1,52 +1,109 @@
-
-import random, sys, copy, os, pygame
+import pygame, sys
 from pygame.locals import *
 
-FPS = 30 
-WINWIDTH = 800 
-WINHEIGHT = 600 
+class Game:
+    def __init__(self):
+        self.FPS = 30
+        self.WINWIDTH = 800
+        self.WINHEIGHT = 600
+        self.cell_size = 40
+        self.maze = [  # Example maze
+            [1, 1, 1, 1, 1, 1],
+            [1, 0, 0, 0, 0, 1],
+            [1, 1, 1, 1, 1, 1],
+        ]
+        self.player = player(pygame.Rect(50, 50, 30, 30))
 
-def main():
-    pygame.init()
-    clock = pygame.time.Clock()
-    screen = pygame.display.set_mode((WINWIDTH, WINHEIGHT))
-    pygame.display.set_caption("My Game")
+    def terminate(self):
+        pygame.quit()
+        sys.exit()
 
-    start_menu()
+    def start_menu(self, screen):
+        font = pygame.font.Font(None, 74)
+        text = font.render("Press ENTER to Start", True, "WHITE")
+        text_rect = text.get_rect(center=(self.WINWIDTH // 2, self.WINHEIGHT // 2))
+        while True:
+            screen.fill("BLACK")
+            screen.blit(text, text_rect)
+            pygame.display.flip()
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    self.terminate()
+                elif event.type == KEYDOWN:
+                    if event.key == K_RETURN:
+                        return
 
-    while True:
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                terminate()
+    def main(self):
+        pygame.init()
+        clock = pygame.time.Clock()
+        screen = pygame.display.set_mode((self.WINWIDTH, self.WINHEIGHT))
+        pygame.display.set_caption("Puzzle Maze")
+        self.start_menu(screen)
+        running = True
+        while running:
+            screen.fill("WHITE")
+            for row in range(len(self.maze)):
+                for col in range(len(self.maze[row])):
+                    if self.maze[row][col] == 1:
+                        pygame.draw.rect(
+                            screen, "BLACK",
+                            pygame.Rect(col * self.cell_size, row * self.cell_size, self.cell_size, self.cell_size)
+                        )
+            self.player.draw(screen)
+            pygame.display.flip()
+            for event in pygame.event.get():
+                if event.type == QUIT:
+                    running = False
+            clock.tick(self.FPS)
+        self.terminate()
 
+class player:
+    def __init__(self, sprite):
+        self.sprite = sprite
 
-        screen.fill((0, 0, 255))  
-        pygame.display.flip()
-        clock.tick(FPS)
-
-
-def start_menu():
-    screen = pygame.display.set_mode((WINWIDTH, WINHEIGHT))
-    font = pygame.font.Font(None, 74)  
-    text = font.render("Press ENTER to Start", True, (255, 255, 255)) 
-    text_rect = text.get_rect(center=(WINWIDTH // 2, WINHEIGHT // 2))
-
-    while True:
-        screen.fill((0, 0, 0)) 
-        screen.blit(text, text_rect)  
-        pygame.display.flip()
-
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                terminate()
-            elif event.type == KEYDOWN:
-                if event.key == K_RETURN: 
-                    return  
-
-def terminate():
-    pygame.quit()
-    sys.exit()
-
+    def draw(self, screen):
+        pygame.draw.rect(screen, "BLUE", self.sprite)
 
 if __name__ == '__main__':
-    main()
+    game = Game()
+    game.main()
+
+
+
+
+class levelone:
+  global cell_size
+  cell_size = 40
+
+  global maze
+  
+  maze = [
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+[1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 1],
+[1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+[1, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1],
+[1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
+[1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1],
+[1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 0, 1, 0, 1],
+[1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 0, 1],
+[1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 1, 1, 0, 1],
+[1, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1],
+[1, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1],
+[1, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1],
+[1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1],
+[1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1],
+[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+
+
+  ]  # 1 = wall, 0 = path
+
+
+
+
+
+class player:
+    def __init__(self, sprite):
+        self.sprite = sprite
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, "BLUE", self.sprite)
