@@ -1,18 +1,29 @@
 import pygame, sys
 from pygame.locals import *
+from levelone import *
+from player import *
 
 class Game:
     def __init__(self):
-        self.FPS = 30
-        self.WINWIDTH = 800
-        self.WINHEIGHT = 600
-        self.cell_size = 40
-        self.maze = [  # Example maze
-            [1, 1, 1, 1, 1, 1],
-            [1, 0, 0, 0, 0, 1],
-            [1, 1, 1, 1, 1, 1],
-        ]
-        self.player = player(pygame.Rect(50, 50, 30, 30))
+      self.FPS = 30
+      self.WINWIDTH = 800
+      self.WINHEIGHT = 600
+      self.maze = maze
+      self.player = player(pygame.Rect(50, 50, 30, 30))
+      self.cell_size = cell_size
+      self.wall_rects = []  # New list for wall rectangles
+
+    def load_walls(self):
+      for row in range(len(self.maze)):
+        for col in range(len(self.maze[row])):
+            if self.maze[row][col] == 1:  # Wall tile
+                rect = pygame.Rect(
+                    col * self.cell_size, 
+                    row * self.cell_size, 
+                    self.cell_size, 
+                    self.cell_size
+                )
+                self.wall_rects.append(rect)
 
     def terminate(self):
         pygame.quit()
@@ -34,29 +45,59 @@ class Game:
                         return
 
     def main(self):
-        pygame.init()
-        clock = pygame.time.Clock()
-        screen = pygame.display.set_mode((self.WINWIDTH, self.WINHEIGHT))
-        pygame.display.set_caption("Puzzle Maze")
-        self.start_menu(screen)
-        running = True
-        while running:
-            screen.fill("WHITE")
-            for row in range(len(self.maze)):
-                for col in range(len(self.maze[row])):
-                    if self.maze[row][col] == 1:
-                        pygame.draw.rect(
-                            screen, "BLACK",
-                            pygame.Rect(col * self.cell_size, row * self.cell_size, self.cell_size, self.cell_size)
-                        )
-            self.player.draw(screen)
-            pygame.display.flip()
-            for event in pygame.event.get():
-                if event.type == QUIT:
-                    running = False
-            clock.tick(self.FPS)
-        self.terminate()
+     pygame.init()
+     clock = pygame.time.Clock()
+     screen = pygame.display.set_mode((self.WINWIDTH, self.WINHEIGHT))
+     pygame.display.set_caption("Puzzle Maze")
+     self.start_menu(screen)
+     self.load_walls()  # Load wall rectangles
 
+     running = True
+     move_x, move_y = 0, 0  # Movement deltas
+
+     while running:
+        screen.fill("WHITE")
+
+
+        for wall in self.wall_rects:
+            pygame.draw.rect(screen, "BLACK", wall)
+        
+     
+        for event in pygame.event.get():
+            if event.type == QUIT:
+                running = False
+            elif event.type == KEYDOWN:
+                if event.key == K_UP:
+                    move_y = -5
+                elif event.key == K_DOWN:
+                    move_y = 5
+                elif event.key == K_LEFT:
+                    move_x = -5
+                elif event.key == K_RIGHT:
+                    move_x = 5
+            elif event.type == KEYUP:
+                if event.key in (K_UP, K_DOWN):
+                    move_y = 0
+                elif event.key in (K_LEFT, K_RIGHT):
+                    move_x = 0
+
+      
+        self.player.move(move_x, move_y, self.wall_rects)
+
+ 
+        self.player.draw(screen)
+
+        pygame.display.flip()
+        clock.tick(self.FPS)
+
+
+
+
+if __name__ == '__main__':
+    game = Game()
+    game.main()
+
+import pygame
 class player:
     def __init__(self, sprite):
         self.sprite = sprite
@@ -64,10 +105,14 @@ class player:
     def draw(self, screen):
         pygame.draw.rect(screen, "BLUE", self.sprite)
 
-if __name__ == '__main__':
-    game = Game()
-    game.main()
+    def move(self, x_change, y_change, wall_rects):
 
+        new_position = self.sprite.move(x_change, y_change)
+        
+
+        if not any(new_position.colliderect(wall) for wall in wall_rects):
+            # Update position only if no collision, THIS IS HOW IT WORKS MARTIN
+            self.sprite = new_position
 
 
 
@@ -100,10 +145,3 @@ class levelone:
 
 
 
-
-class player:
-    def __init__(self, sprite):
-        self.sprite = sprite
-
-    def draw(self, screen):
-        pygame.draw.rect(screen, "BLUE", self.sprite)
