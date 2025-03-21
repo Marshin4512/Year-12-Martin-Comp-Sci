@@ -1,3 +1,10 @@
+Sorry I didnt sumit the things onto seqta
+The documents are not in PDF format because I wanted to prove I actually did it and that I did not put this together at the last second. I also do not have the files on my laoptop and im afraid that downloading them will change the omdification time
+The 3 files for delierable 2 are the class diagram word doc, the flowchart image and the psudeocode
+
+
+
+
 Deliveralbe 1
 -The game I have chosen is a puzzle maze game. The reason for this choice is because I find puzzle games to be simpler as I 
  do not need good visuals and can create a simple yet fun game. I am also unfamilar with the other game types and I had already 
