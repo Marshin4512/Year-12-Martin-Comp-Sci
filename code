@@ -1,3 +1,5 @@
+MAIN MODULE
+
 import pygame, sys
 from pygame.locals import *
 from levelone import *
@@ -97,6 +99,8 @@ if __name__ == '__main__':
     game = Game()
     game.main()
 
+PLAYERMODULE
+
 import pygame
 class player:
     def __init__(self, sprite):
@@ -115,6 +119,7 @@ class player:
             self.sprite = new_position
 
 
+LEVELONEMODULE
 
 class levelone:
   global cell_size
