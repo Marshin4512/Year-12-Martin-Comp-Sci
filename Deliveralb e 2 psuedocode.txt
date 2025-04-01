@@ -1,0 +1,54 @@
+Deliverable 2
+MAIN GAME MODULE
+START
+    IMPORT player_module AS player
+    IMPORT enemy_module AS enemy
+    IMPORT maze_module AS maze
+    VAR game_over = false
+    VAR player_wins = false
+
+        VAR maze_layout = maze.LoadMaze("Level1")
+
+     
+        VAR player_position = player.Initialize(maze_layout)
+
+        VAR enemies = enemy.Initialize(maze_layout)
+
+    
+        WHILE game_over == false DO
+            TRY
+                maze.Render(maze_layout, player_position, enemies)
+            CATCH RENDER_ERROR
+                PRINT "Error rendering the game. Please restart."
+                EXIT
+            END TRY
+
+            VAR input = player.GetInput()
+
+    
+            IF input == "QUIT" THEN
+                game_over = true
+  
+            END IF
+        END WHILE
+
+        IF player_wins == true THEN
+            PRINT "Win"
+        ELSE
+            PRINT "Death"
+        END IF
+END
+
+PLAYER MODULE
+
+START
+ FUNCTION Initialize(maze_layout)
+    RETURN player_position
+
+ FUNCTION GetInput()
+    RETURN input
+
+ FUNCTION Move(player_position, input, maze_layout)
+    RETURN new_position
+END
+
