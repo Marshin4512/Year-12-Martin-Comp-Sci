@@ -1,9 +1,8 @@
-# menu.py
 import pygame
 import sys
 from config import WINWIDTH, WINHEIGHT, WHITE, BLACK
 
-class menu:
+class Menu:
     def terminate(self):
         pygame.quit()
         sys.exit()
