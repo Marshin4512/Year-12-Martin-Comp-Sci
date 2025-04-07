@@ -4,10 +4,7 @@ from game import Game
 
 def main():
     
-    """Entry point for the game
-    
-    Creates and runs the game instance with error handling
-    """
+
     try:
         # Create game instance
         game = Game()
@@ -16,8 +13,8 @@ def main():
         game.run()
         
     except KeyboardInterrupt:
-        # Handle clean exit with Ctrl+C
-        print("Game terminated by user")
+        #exit
+        print("Game terminated")
         pygame.quit()
         sys.exit(0)
         
@@ -28,7 +25,7 @@ def main():
         sys.exit(1)
         
     finally:
-        # Ensure pygame is properly shut down in any case
+        # Ensure pygame is shut down
         pygame.quit()
 
 if __name__ == "__main__":

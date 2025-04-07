@@ -8,9 +8,11 @@ class Menu:
         sys.exit()
 
     def start_menu(self, screen):
+        #menu
         font = pygame.font.Font(None, 74)
         text = font.render("Press ENTER to Start", True, WHITE)
         text_rect = text.get_rect(center=(WINWIDTH // 2, WINHEIGHT // 2))
+        #While loop is there to handle stuff
         while True:
             screen.fill(BLACK)
             screen.blit(text, text_rect)
