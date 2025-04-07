@@ -1,0 +1,14 @@
+
+The game I have chosen is a puzzle maze game. The reason for this choice is because I wanted to try something new compared to last year and I feel lke a maze game will suit me.
+
+Requirements
+-A maze game is to be created, the maze game must get progressively harder each level
+-Target audience are teenagers and higher, game is not for small chidren due to their limited cognitive ability
+-OOP needs to be correctly and consistently used. Inheritance must be used to inherit functions from parent classes, and polymorphism must be used to overite functions inhertired from the parent class
+-Code needs to be modular enough to the point it can be reused for other projects.
+
+Plan/Design
+-Player will navigate a maze that gets harder each level, enemies will attempt to stop the player
+-I plan for the player and enemy class to share an entity parent class 
+-I also plan for the levels to share a parent class as well
+ 
