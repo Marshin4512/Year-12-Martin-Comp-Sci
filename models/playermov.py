@@ -2,16 +2,16 @@ import pygame
 from player import Player
 
 class PlayerController:
-    """Controls player input and updates player entity"""
-    
+
+    #Initilise everything
     def __init__(self):
         self.player = Player(pygame.Rect(25, 25, 30, 30), speed=5)
         self.move_x = 0
         self.move_y = 0
-        self.powerup_effects = {}  # Track active power-ups
+    
 
     def handle_event(self, event):
-        """Handle keyboard input events"""
+        #Handle the arrow key movement
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_UP:
                 self.move_y = -5
@@ -28,18 +28,18 @@ class PlayerController:
                 self.move_x = 0
 
     def update(self, wall_rects):
-        """Update player position based on current input"""
+        #update player poisiton
         self.player.move(self.move_x, self.move_y, wall_rects)
         
         
 
 
     def draw(self, screen):
-        """Draw the player"""
+        #draw player
         self.player.draw(screen)
     
     def reset(self, position):
-        """Reset player to a specific position"""
+        #reset player to position
         self.player.reset()
         self.player.sprite.topleft = position
         self.move_x = 0

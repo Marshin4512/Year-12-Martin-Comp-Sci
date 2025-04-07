@@ -1,13 +1,12 @@
 from entity import Entity
 
-class Enemy(Entity):
-    """Enemy entity that inherits from Entity"""
-    
-    def __init__(self, sprite, speed, chase_range=200):
+class Enemy(Entity): #Enemy inherits from the entity class
+#initlises everything
+    def __init__(self, sprite, speed):
         super().__init__(sprite, speed, color="RED")
-        self.chase_range = chase_range
+        
     
-    def chase(self, target):
+    def chase(self, target): #Handles the chasing, if it is not touching it then move towards player
         if self.sprite.x < target.sprite.x:
             self.sprite.x += self.speed
         elif self.sprite.x > target.sprite.x:

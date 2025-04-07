@@ -2,6 +2,7 @@ import pygame
 from enemy_manager import *
 
 class CollisionManager:
+    #Inistlise everything
     def __init__(self, level_manager, player_controller, enemy_manager):
         self.level_manager = level_manager
         self.player_controller = player_controller
@@ -29,12 +30,12 @@ class CollisionManager:
         return False
     
     def check_coin_collisions(self):
-        
+        #Check if coin has collided with player
         player = self.player_controller.player
         current_level = self.level_manager.current_level
         wall_manager = current_level.wall_manager
         
-        # Use a copy to safely remove items during iteration
+        # Use a copy to remove item
         coins_to_remove = []
         
         for coin_rect in wall_manager.coin_rects:
@@ -47,7 +48,7 @@ class CollisionManager:
             wall_manager.coin_rects.remove(coin)
     
     def check_enemy_collisions(self):
-            """Check if player has collided with any enemies"""
+            #Check if enemy has touched player
             player = self.player_controller.player
 
             for enemy in self.enemy_manager.enemies:

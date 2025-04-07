@@ -2,9 +2,10 @@ import pygame
 from level import Level
 from levelone import maze as level_one_maze, cell_size as level_one_cell_size
 from leveltwo import maze as level_two_maze, cell_size as level_two_cell_size
-from walls import *
+from walls import WallManager
 
 class LevelManager:
+    #initlise everything
     def __init__(self, screen, player):
         self.screen = screen
         self.player = player
@@ -30,7 +31,7 @@ class LevelManager:
         ]
      
     def load_level(self, level_number):
-        """Load a specific level by number (1-based)"""
+       #load the level
         if 1 <= level_number <= len(self.level_data):
             self.current_level_number = level_number
             level_config = self.level_data[level_number - 1]
@@ -39,7 +40,7 @@ class LevelManager:
             self.player.sprite.width = level_config['player_size'][0]
             self.player.sprite.height = level_config['player_size'][1]
             self.player.speed = level_config['player_speed']
-            
+           
             # Create and load the level
             if self.current_level:
                 self.current_level.clear()
@@ -51,14 +52,15 @@ class LevelManager:
                 screen=self.screen
             )
             self.current_level.load()
-            
             self.current_level.wall_manager.load_coins()
+         
+            
             
             return True
         return False
 
     def load_next_level(self):
-        """Load the next level in sequence"""
+        #load next nevel
         next_level = self.current_level_number + 1
         if next_level <= len(self.level_data):
             self.load_level(next_level)
@@ -66,14 +68,14 @@ class LevelManager:
         return False  # No more levels
 
     def get_player_start_pos(self):
-        """Get the player starting position for the current level"""
+        # get player starting position
         return self.level_data[self.current_level_number - 1]['player_start']
     
     def get_enemy_start_pos(self):
-        """Get the enemy starting position for the current level"""
+        #get enemy starting position
         return self.level_data[self.current_level_number - 1]['enemy_start']
 
     def draw(self):
-        """Draw the current level"""
+        # Draw the level
         if self.current_level:
             self.current_level.draw()

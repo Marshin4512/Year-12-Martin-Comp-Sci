@@ -7,6 +7,7 @@ from enemy_manager import EnemyManager
 from collision_manager import CollisionManager
 from menu import Menu
 from playermov import *
+from walls import *
 class Game:
     def __init__(self):
         self.FPS = FPS
@@ -14,21 +15,22 @@ class Game:
         self.clock = None
         self.running = True
         
-        # Initialize managers
+        # Initialize everything
         self.level_manager = None
         self.player_controller = None
         self.enemy_manager = None
         self.collision_manager = None
         self.menu = None
+       
 
     def initialize(self):
-        """Initialize pygame and all game components"""
+        
         pygame.init()
         self.screen = pygame.display.set_mode((WINWIDTH, WINHEIGHT))
-        pygame.display.set_caption("Puzzle Maze")
+        pygame.display.set_caption("Maze")
         self.clock = pygame.time.Clock()
         
-        # Initialize managers
+        
         self.menu = Menu()
         self.player_controller = PlayerController()
         self.level_manager = LevelManager(self.screen, self.player_controller.player)
@@ -38,33 +40,33 @@ class Game:
             self.player_controller,
             self.enemy_manager
         )
+        
 
-    def handle_events(self):
-        """Process user input"""
+    def handle_events(self): #Event handler
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.running = False
             self.player_controller.handle_event(event)
 
     def update(self):
-        """Update game state"""
-        # Update player position based on current input
+       
+        # Update player position based on movement
         self.player_controller.update(self.level_manager.current_level.wall_manager.wall_rects)
         
-        # Update enemies
+        # Update the enemy
         self.enemy_manager.update(self.player_controller.player)
         
-        # Check collisions
+        # Check the collison
         level_complete = self.collision_manager.check_collisions()
         
-        # Handle level transitions
+        # handle enxt level loading
         if level_complete:
             self.level_manager.load_next_level()
             self.player_controller.reset(self.level_manager.get_player_start_pos())
             self.enemy_manager.reset(self.level_manager.get_enemy_start_pos())
 
     def render(self):
-        """Render the current game state"""
+        #reset the maze by making everything white
         self.screen.fill(WHITE)
         
         # Draw level
@@ -76,15 +78,16 @@ class Game:
         # Draw enemies
         self.enemy_manager.draw(self.screen)
         
+        
         pygame.display.flip()
 
     def terminate(self):
-        """Shut down the game"""
+        #close
         pygame.quit()
         sys.exit()
 
     def run(self):
-        """Main game loop"""
+        #main game loop
         self.initialize()
         self.menu.start_menu(self.screen)
         self.level_manager.load_level(1)  # Start with level 1
