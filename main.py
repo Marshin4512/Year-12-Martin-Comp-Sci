@@ -2,8 +2,7 @@ import sys
 import pygame
 from game import Game
 
-def main():
-    
+def main(): #This is the main file
 
     try:
         # Create game instance
@@ -13,13 +12,13 @@ def main():
         game.run()
         
     except KeyboardInterrupt:
-        #exit
+        #Exception handling, if interuppted,g ame is terminated
         print("Game terminated")
         pygame.quit()
         sys.exit(0)
         
     except Exception as e:
-        # Handle unexpected errors
+        # Handle unexpected errors, if there is error, print error, and terminate the game
         print(f"Error: {e}")
         pygame.quit()
         sys.exit(1)
