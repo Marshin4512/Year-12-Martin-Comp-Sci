@@ -16,8 +16,6 @@ Usage guide
 -Arrows to move the player
 -You can trick the enemy by staying in certain spots luring it away from where you need to go, check video in docs folder
 
-Requirements
-(insert delvierable 1 and 2 here)
 
 Credits
 -Mitchell Martin - Figuring out errors
