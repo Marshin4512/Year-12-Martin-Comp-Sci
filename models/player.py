@@ -8,9 +8,6 @@ class Player(Entity):#Player inherits from entity class
         super().__init__(sprite, speed, color="BLUE")
         self.coins_collected = 0
     
-    def collect_coin(self):
-        #coin coleciton
-        self.coins_collected += 1
-        return self.coins_collected 
+
 
     

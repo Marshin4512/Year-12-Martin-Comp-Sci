@@ -8,6 +8,7 @@ from collision_manager import CollisionManager
 from menu import Menu
 from playermov import *
 from walls import *
+
 class Game:
     def __init__(self):
         self.FPS = FPS
@@ -24,22 +25,21 @@ class Game:
        
 
     def initialize(self):
-        
         pygame.init()
         self.screen = pygame.display.set_mode((WINWIDTH, WINHEIGHT))
         pygame.display.set_caption("Maze")
         self.clock = pygame.time.Clock()
-        
-        
+    
+    
         self.menu = Menu()
         self.player_controller = PlayerController()
         self.level_manager = LevelManager(self.screen, self.player_controller.player)
         self.enemy_manager = EnemyManager()
         self.collision_manager = CollisionManager(
-            self.level_manager,
-            self.player_controller,
-            self.enemy_manager
-        )
+        self.level_manager,
+        self.player_controller,
+        self.enemy_manager
+    )
         
 
     def handle_events(self): #Event handler
@@ -65,6 +65,7 @@ class Game:
             self.player_controller.reset(self.level_manager.get_player_start_pos())
             self.enemy_manager.reset(self.level_manager.get_enemy_start_pos())
 
+
     def render(self):
         #reset the maze by making everything white
         self.screen.fill(WHITE)
@@ -77,7 +78,6 @@ class Game:
         
         # Draw enemies
         self.enemy_manager.draw(self.screen)
-        
         
         pygame.display.flip()
 
@@ -100,5 +100,6 @@ class Game:
             self.update()
             self.render()
             self.clock.tick(self.FPS)
+  
 
         self.terminate()

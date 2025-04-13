@@ -1,6 +1,6 @@
 import pygame
 from enemy_manager import *
-
+from walls import *
 class CollisionManager:
     #Inistlise everything
     def __init__(self, level_manager, player_controller, enemy_manager):
@@ -42,10 +42,12 @@ class CollisionManager:
             if player.sprite.colliderect(coin_rect):
                 coins_to_remove.append(coin_rect)
                 self.coins_collected += 1
+                
         
         # Remove collected coins
         for coin in coins_to_remove:
             wall_manager.coin_rects.remove(coin)
+            
     
     def check_enemy_collisions(self):
             #Check if enemy has touched player

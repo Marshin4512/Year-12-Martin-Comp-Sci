@@ -24,9 +24,10 @@ class Level:
         self.wall_manager.end_rects.clear()
 
     def draw(self):
-        # Draw walls and end tiles
+        # Draw walls, end tiles, and coins
         self.wall_manager.draw_walls(self.screen)
         self.wall_manager.draw_end(self.screen)
+        self.wall_manager.draw_coins(self.screen)
 
     def check_end_collision(self):
         # Check if the player collides with the end tiles

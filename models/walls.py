@@ -47,7 +47,7 @@ class WallManager:
                         self.cell_size
                     )
                     self.coin_rects.append(rect)
-                print("coin loaded")
+               
 
     def draw_walls(self, screen):
         #draw the wall
@@ -63,5 +63,5 @@ class WallManager:
         #draw the coin
         for coin in self.coin_rects:
             pygame.draw.rect(screen, (255, 255, 0), coin) 
-            print("yello  coin")
+         
   
